@@ -18,7 +18,10 @@ router.get('/', (req, res, next) => {
 /* GET - displays the Login Page */
 router.get('/login', (req, res, next)=>{
 if(!req.user){
-
+  res.render('auth/login', {
+    title: 'Home',
+    books: ''
+   });
 }else{
   return res.redirect("/");
 }
