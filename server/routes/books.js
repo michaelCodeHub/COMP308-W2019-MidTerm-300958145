@@ -1,3 +1,9 @@
+// /routes/books.js
+// Michael Adaikalaraj
+// 300958145
+// Favourite Books
+
+
 // modules required for routing
 let express = require('express');
 let router = express.Router();
@@ -99,10 +105,17 @@ router.post('/:id', (req, res, next) => {
 
 // GET - process the delete by user id
 router.get('/delete/:id', (req, res, next) => {
+  let id = req.params.id;
 
-    /*****************
-     * ADD CODE HERE *
-     *****************/
+  book.remove( {_id:id} , (err, bookObject)=>{
+      if(err){
+          console.log(err);
+          res.end(err);
+      }
+      else{
+          res.redirect("/books");
+      }
+  });
 });
 
 

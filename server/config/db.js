@@ -1,3 +1,8 @@
+// /server/config/db.ejs
+// Michael Adaikalaraj
+// 300958145
+// Favourite Books
+
 module.exports = {
   //local MongoDB deployment ->
   "URI": "mongodb://localhost/books308"
