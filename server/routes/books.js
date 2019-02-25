@@ -43,7 +43,7 @@ router.get('/', requireAuth, (req, res, next) => {
 router.get('/add',requireAuth, (req, res, next) => {
     res.render('books/details', { 
       title: 'Add New Book',
-      books: book,
+      books: '',
       displayName: req.user ? req.user.displayName : ""
     });
 
@@ -51,6 +51,8 @@ router.get('/add',requireAuth, (req, res, next) => {
 
 // POST process the Book Details page and create a new Book - CREATE
 router.post('/add',requireAuth, (req, res, next) => {
+
+  //new book object
   let newBook = book({
     "Title": req.body.title,
     "Description": req.body.description,
@@ -58,6 +60,8 @@ router.post('/add',requireAuth, (req, res, next) => {
     "Author": req.body.author,
     "Genre": req.body.genre
   });
+
+  //adding book to database
   book.create(newBook, (err, book) => {
     if (err) {
       console.log(err);
@@ -80,7 +84,7 @@ router.get('/:id',requireAuth, (req, res, next) => {
           res.end(err);
       }
       else{
-          console.log(bookObject);
+
           res.render('books/details', { 
               title: 'Edit Book',
               books : bookObject,
@@ -103,6 +107,8 @@ router.post('/:id',requireAuth, (req, res, next) => {
       "Author": req.body.author,
       "Genre": req.body.genre
   });
+
+  //updating a book 
   book.update( {_id:id} , updatedBook, (err, bookObject)=>{
       if(err){
           console.log(err);
